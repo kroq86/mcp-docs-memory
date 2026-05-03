@@ -2,6 +2,8 @@
 
 MCP server (stdio) for semantic document search and structured memory using **Ollama** embeddings and **DuckDB** persistent storage.
 
+Read the technical article: [Why Docs-Memory Beats the Pure Karpathy Approach](https://kroq86.github.io/mcp-docs-memory/).
+
 ## Prerequisites
 
 - Python 3.11+

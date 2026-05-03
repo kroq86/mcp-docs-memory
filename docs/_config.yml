@@ -1,0 +1,13 @@
+title: docs-memory-mcp
+description: MCP server for semantic document search and durable memory using Ollama embeddings and DuckDB.
+url: "https://kroq86.github.io"
+baseurl: "/mcp-docs-memory"
+theme: minima
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+author:
+  name: kroq86
+social:
+  links:
+    - https://github.com/kroq86/mcp-docs-memory
