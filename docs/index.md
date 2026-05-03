@@ -6,7 +6,7 @@ permalink: /
 canonical_url: "https://kroq86.github.io/mcp-docs-memory/"
 ---
 
-# Why Docs-Memory Beats the Pure Karpathy Approach
+[Project repository](https://github.com/kroq86/mcp-docs-memory)
 
 The pure Karpathy-style approach is attractive because it is simple: keep the important knowledge in plain text, give the model enough context, and let a capable LLM reason over it directly. It is a very good baseline. It keeps the system understandable, avoids premature infrastructure, and reminds us that most agent systems fail because they hide simple thinking behind complicated machinery.
 
