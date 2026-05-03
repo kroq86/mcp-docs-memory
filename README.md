@@ -17,11 +17,41 @@ source .venv/bin/activate
 pip install -e .
 ```
 
-## Cursor / MCP Config
+## MCP Client Config
 
-Use exactly one config file for `docs-memory`, otherwise Cursor may show duplicate servers.
+Configure `docs-memory` in whichever MCP client you use: Codex, Claude Desktop,
+Cursor, or any other client that supports stdio MCP servers.
 
-After changing `mcp.json`: **Developer: Reload Window** (or restart Cursor). If the row still says Disabled, turn on the toggle for `docs-memory` in **Settings -> MCP**.
+Use exactly one active config entry for `docs-memory`. If your client has both
+global and project-level MCP configuration, do not define the same server in
+both places unless that client explicitly de-duplicates entries.
+
+Generic stdio server shape:
+
+```json
+{
+  "mcpServers": {
+    "docs-memory": {
+      "command": "/absolute/path/to/docs-memory-mcp/.venv/bin/python",
+      "args": ["-m", "docs_memory_mcp"],
+      "env": {
+        "DOCS_ROOT": "/absolute/path/to/your/docs/root",
+        "OLLAMA_HOST": "http://127.0.0.1:11434",
+        "OLLAMA_EMBED_MODEL": "nomic-embed-text"
+      }
+    }
+  }
+}
+```
+
+Client notes:
+
+- Codex: add the server to your Codex MCP configuration and restart or reload
+  the session so the new tools are discovered.
+- Claude Desktop: add the server under `mcpServers` in the Claude Desktop MCP
+  config file, then restart Claude Desktop.
+- Cursor: add one `docs-memory` entry, reload the window after changing config,
+  and enable/trust the server in MCP settings if your Cursor version asks.
 
 `docs_index_file` updates only the file(s) you name. `docs_reindex` clears and rebuilds the active document collection. Neither is required to start the MCP server.
 
@@ -31,7 +61,7 @@ This server does runtime retrieval, not automatic memory injection. The LLM only
 
 If it feels the same as a plain LLM session, check these first:
 
-1. **Consent / trust button:** in Cursor, open **Settings -> MCP** and make sure `docs-memory` is enabled/trusted/approved.
+1. **Client approval:** make sure your MCP client has enabled, trusted, or approved `docs-memory` if it requires confirmation.
 2. **Tool visibility:** ask the agent directly: "Use `docs_search` before answering."
 3. **Index health:** call `docs_health`. You want `ollama_ok=true` and a non-zero `chunks_in_index`.
 4. **Retrieval quality:** try a query with a phrase you know appears in the docs.
